@@ -1,6 +1,6 @@
 package services.utils;
 
-
+import ch.qos.logback.classic.PatternLayout;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class PatternMaskingLayout extends ch.qos.logback.classic.PatternLayout {
+public class PatternMaskingLayout extends PatternLayout {
 
     private Pattern multilinePattern;
     private List<String> maskPatterns = new ArrayList<>();
