@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
-import services.utils.PatternMaskingLayout;
 
 import java.net.URISyntaxException;
 import java.util.Calendar;
@@ -20,7 +19,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class PatternMaskingLayout {
+public class PatternMaskingLayoutTest {
     private PatternMaskingLayout patternMaskingLayout = new PatternMaskingLayout();
 
     @Before
