@@ -1,5 +1,5 @@
 #!groovy
-build('elon', 'docker-host') {
+build('elon', 'jenkins_harbor') {
     checkoutRepo()
     loadBuildUtils()
 
