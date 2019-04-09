@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
-import com.rbkmoney.logback.mask.PatternMaskingLayout;
+import services.utils.PatternMaskingLayout;
 
 import java.net.URISyntaxException;
 import java.util.Calendar;
@@ -21,24 +21,23 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class PatternMaskingLayout {
-    PatternMaskingLayout patternMaskingLayout = new PatternMaskingLayout();
+    private PatternMaskingLayout patternMaskingLayout = new PatternMaskingLayout();
 
     @Before
-    public void init(){
+    public void init() {
 
         patternMaskingLayout.setPattern("%-5p [%d{ISO8601}] %m%n");
 
-        String[] maskPatterns  = {"\\b\\d{6}([\\d\\s]{2,9})\\d{4}\\b", "(\\b\\d{3}\\b)"};
-        for (String maskPattern:maskPatterns) {
+        String[] maskPatterns = {"\\b\\d{6}([\\d\\s]{2,9})\\d{4}\\b", "(\\b\\d{3}\\b)"};
+        for (String maskPattern : maskPatterns) {
             patternMaskingLayout.addMaskPattern(maskPattern);
         }
 
-        LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory ();
+        LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
         loggerContext.reset();
-        patternMaskingLayout.setContext (loggerContext);
+        patternMaskingLayout.setContext(loggerContext);
         patternMaskingLayout.start();
     }
-
 
     @Test
     public void PatternMaskingLayoutTest() throws URISyntaxException {
@@ -61,109 +60,90 @@ public class PatternMaskingLayout {
 
         String msg = b.build().toString();
 
-        ILoggingEvent loggingEvent = createLoggingEvent( Level.DEBUG, calendar.getTime(), msg);
+        ILoggingEvent loggingEvent = createLoggingEvent(Level.DEBUG, calendar.getTime(), msg);
 
         assertEquals("DEBUG [2019-04-15 14:15:16,000] http://localhost/?COMMAND=PREAUTH&VERSION=1.0&PAN=341234******9876&PAN2=987654******7654&EXPDATE=2012&TERMID=1235111&AMOUNT=1000&CURRENCY=***&INVOICE=invoice_id.1&CVV2=***&RRN=904792**0574&CONDITION=3&TDSDATA=\r\n",
                 patternMaskingLayout.doLayout(loggingEvent));
-
-
     }
 
-    ILoggingEvent createLoggingEvent( Level logLevel, Date date, String msg)
-    {
-        return new ILoggingEvent()
-        {
+    ILoggingEvent createLoggingEvent(Level logLevel, Date date, String msg) {
+
+        return new ILoggingEvent() {
+
             @Override
-            public String getThreadName()
-            {
+            public String getThreadName() {
                 return null;
             }
 
             @Override
-            public Level getLevel()
-            {
+            public Level getLevel() {
                 return logLevel;
             }
 
             @Override
-            public String getMessage()
-            {
+            public String getMessage() {
                 return null;
             }
 
             @Override
-            public Object[] getArgumentArray()
-            {
-                return new Object[ 0 ];
+            public Object[] getArgumentArray() {
+                return new Object[0];
             }
 
             @Override
-            public String getFormattedMessage()
-            {
+            public String getFormattedMessage() {
                 return msg;
             }
 
             @Override
-            public String getLoggerName()
-            {
+            public String getLoggerName() {
                 return "loggerName";
             }
 
             @Override
-            public LoggerContextVO getLoggerContextVO()
-            {
+            public LoggerContextVO getLoggerContextVO() {
                 return null;
             }
 
             @Override
-            public IThrowableProxy getThrowableProxy()
-            {
+            public IThrowableProxy getThrowableProxy() {
                 return null;
             }
 
             @Override
-            public StackTraceElement[] getCallerData()
-            {
+            public StackTraceElement[] getCallerData() {
                 return null;
             }
 
             @Override
-            public boolean hasCallerData()
-            {
+            public boolean hasCallerData() {
                 return false;
             }
 
             @Override
-            public Marker getMarker()
-            {
+            public Marker getMarker() {
                 return null;
             }
 
             @Override
-            public Map<String, String> getMDCPropertyMap()
-            {
+            public Map<String, String> getMDCPropertyMap() {
                 return null;
             }
 
             @Override
-            public Map<String, String> getMdc()
-            {
+            public Map<String, String> getMdc() {
                 return null;
             }
 
             @Override
-            public long getTimeStamp()
-            {
+            public long getTimeStamp() {
                 return date.getTime();
             }
 
             @Override
-            public void prepareForDeferredProcessing()
-            {
+            public void prepareForDeferredProcessing() {
 
             }
         };
-
     }
-
 }
