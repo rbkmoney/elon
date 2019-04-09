@@ -1,5 +1,5 @@
 #!groovy
-build('elon', 'jenkins_harbor') {
+build('elon', 'java-maven') {
     checkoutRepo()
     loadBuildUtils()
 
@@ -8,6 +8,6 @@ build('elon', 'jenkins_harbor') {
         javaLibPipeline = load("build_utils/jenkins_lib/pipeJavaLib.groovy")
     }
 
-    def buildImageTag = "4799280a02cb73761a3ba3641285aac8ec4ec482"
+    def buildImageTag = "a166721af4f3454345d443bc681b91962d259d40"
     javaLibPipeline(buildImageTag)
 }
