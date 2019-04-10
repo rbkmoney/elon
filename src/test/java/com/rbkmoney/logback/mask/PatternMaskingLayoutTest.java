@@ -5,14 +5,11 @@ import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.classic.spi.LoggerContextVO;
-import org.apache.http.client.utils.URIBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
-import services.utils.PatternMaskingLayout;
 
-import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -20,7 +17,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class PatternMaskingLayout {
+public class PatternMaskingLayoutTest {
     private PatternMaskingLayout patternMaskingLayout = new PatternMaskingLayout();
 
     @Before
@@ -40,29 +37,14 @@ public class PatternMaskingLayout {
     }
 
     @Test
-    public void PatternMaskingLayoutTest() throws URISyntaxException {
+    public void testPatternMaskingLayout() {
         Calendar calendar = new GregorianCalendar(2019, Calendar.APRIL, 15, 14, 15, 16);
 
-        URIBuilder b = new URIBuilder("http://localhost/");
-        b.addParameter("COMMAND", "PREAUTH");
-        b.addParameter("VERSION", "1.0");
-        b.addParameter("PAN", "3412345678909876");
-        b.addParameter("PAN2", "9876543219987654");
-        b.addParameter("EXPDATE", "2012");
-        b.addParameter("TERMID", "1235111");
-        b.addParameter("AMOUNT", "1000");
-        b.addParameter("CURRENCY", "643");
-        b.addParameter("INVOICE", "invoice_id.1"); // invoice_id:payment_id:1
-        b.addParameter("CVV2", "123");
-        b.addParameter("RRN", "904792140574");
-        b.addParameter("CONDITION", "3");
-        b.addParameter("TDSDATA", "");
-
-        String msg = b.build().toString();
+        String msg = "http://localhost/?COMMAND=PREAUTH&VERSION=1.0&PAN=3412345678909876&PAN2=9876543219987654&EXPDATE=2012&TERMID=1235111&AMOUNT=1000&CURRENCY=643&INVOICE=invoice_id.1&CVV2=123&RRN=904792140574&CONDITION=3&TDSDATA=";
 
         ILoggingEvent loggingEvent = createLoggingEvent(Level.DEBUG, calendar.getTime(), msg);
 
-        assertEquals("DEBUG [2019-04-15 14:15:16,000] http://localhost/?COMMAND=PREAUTH&VERSION=1.0&PAN=341234******9876&PAN2=987654******7654&EXPDATE=2012&TERMID=1235111&AMOUNT=1000&CURRENCY=***&INVOICE=invoice_id.1&CVV2=***&RRN=904792**0574&CONDITION=3&TDSDATA=\r\n",
+        assertEquals("DEBUG [2019-04-15 14:15:16,000] http://localhost/?COMMAND=PREAUTH&VERSION=1.0&PAN=341234******9876&PAN2=987654******7654&EXPDATE=2012&TERMID=1235111&AMOUNT=1000&CURRENCY=***&INVOICE=invoice_id.1&CVV2=***&RRN=904792**0574&CONDITION=3&TDSDATA="+System.lineSeparator(),
                 patternMaskingLayout.doLayout(loggingEvent));
     }
 
