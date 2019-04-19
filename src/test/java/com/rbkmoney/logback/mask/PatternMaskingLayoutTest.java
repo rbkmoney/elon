@@ -44,7 +44,7 @@ public class PatternMaskingLayoutTest {
 
         ILoggingEvent loggingEvent = createLoggingEvent(Level.DEBUG, calendar.getTime(), msg);
 
-        assertEquals("DEBUG [2019-04-15 14:15:16,000] http://localhost/?COMMAND=PREAUTH&VERSION=1.0&PAN=341234******9876&PAN2=987654******7654&EXPDATE=2012&TERMID=1235111&AMOUNT=1000&CURRENCY=***&INVOICE=invoice_id.1&CVV2=***&RRN=904792**0574&CONDITION=3&TDSDATA="+System.lineSeparator(),
+        assertEquals("DEBUG [2019-04-15 14:15:16,000] http://localhost/?COMMAND=PREAUTH&VERSION=1.0&PAN=341234******9876&PAN2=987654******7654&EXPDATE=2012&TERMID=1235111&AMOUNT=1000&CURRENCY=***&INVOICE=invoice_id.1&CVV2=***&RRN=904792**0574&CONDITION=3&TDSDATA=" + System.lineSeparator(),
                 patternMaskingLayout.doLayout(loggingEvent));
     }
 
@@ -128,5 +128,4 @@ public class PatternMaskingLayoutTest {
             }
         };
     }
-
 }

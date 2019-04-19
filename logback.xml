@@ -48,9 +48,13 @@
         </encoder>
     </appender>
 
-    <root level="ALL">
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
+
+    <logger name="com.rbkmoney" level="ALL"/>
+
+    <jmxConfigurator/>
 </configuration>
 
