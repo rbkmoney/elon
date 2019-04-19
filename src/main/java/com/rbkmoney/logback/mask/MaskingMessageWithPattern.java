@@ -13,6 +13,7 @@ public class MaskingMessageWithPattern {
         StringBuilder sb = new StringBuilder(message);
         Matcher matcher = multilinePattern.matcher(sb);
         while (matcher.find()) {
+
             IntStream.rangeClosed(1, matcher.groupCount())
                     .filter(group -> matcher.group(group) != null)
                     .forEach(

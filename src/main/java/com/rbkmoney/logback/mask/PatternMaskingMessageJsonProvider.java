@@ -36,5 +36,4 @@ public class PatternMaskingMessageJsonProvider extends AbstractFieldJsonProvider
     public void setFieldNames(LogstashFieldNames fieldNames) {
         setFieldName(fieldNames.getMessage());
     }
-
 }

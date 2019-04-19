@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 
+
 public class PatternMaskingLayout extends PatternLayout {
 
     private Pattern multilinePattern;
@@ -19,7 +20,8 @@ public class PatternMaskingLayout extends PatternLayout {
     }
 
     @Override
-    public String doLayout(ILoggingEvent event) {
+
+    public  String doLayout(ILoggingEvent event) {
         return super.doLayout(new MaskedEvent(event, MaskingMessageWithPattern.maskMessage(event.getFormattedMessage(), multilinePattern)));
     }
 }
