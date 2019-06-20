@@ -13,7 +13,7 @@
 
     <groupId>com.rbkmoney</groupId>
     <artifactId>elon</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <packaging>jar</packaging>
 
     <dependencies>
